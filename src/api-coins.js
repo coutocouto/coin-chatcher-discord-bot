@@ -29,18 +29,37 @@ class apiCoins {
         return priceValues;
 
 
-        async function getValues (completUrl, parameters, cointype) {
+        async function getValues (completUrl, parameters, nameSymbol) {
 
-            const priceValueDolar = await Fetch(completUrl, parameters)
-                .then(response => response.json()
-                    .then(dataCoins => "USD: " + dataCoins.data[nameSymbol].quote.USD.price))
+            try {
+
+                let priceValueDolar = await Fetch(completUrl, parameters)
+                    .then(response => response.json()
+                        .then(dataCoins => dataCoins.data[nameSymbol].quote.USD.price))
 
 
-            const priceValueBRL = await Fetch(completUrl + "&convert=BRL", parameters)
-                .then(response => response.json()
-                    .then(dataCoins => "BRL: " + dataCoins.data[nameSymbol].quote.BRL.price))
+                let priceValueBRL = await Fetch(completUrl + "&convert=BRL", parameters)
+                    .then(response => response.json()
+                        .then(dataCoins => dataCoins.data[nameSymbol].quote.BRL.price))
 
-            return { priceValueDolar, priceValueBRL, nameSymbol };
+                if (priceValueDolar > 1 || priceValueBRL > 1) {
+
+                    priceValueDolar = priceValueDolar.toLocaleString('en-us', { style: 'currency', currency: 'USD' });
+                    priceValueBRL = priceValueBRL.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+
+                    return { priceValueDolar, priceValueBRL, nameSymbol };
+
+                }
+
+                return { priceValueDolar, priceValueBRL, nameSymbol };
+
+
+            } catch (err) {
+
+                return false
+
+            }
+
 
         }
     }

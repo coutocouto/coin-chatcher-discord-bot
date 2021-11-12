@@ -33,9 +33,9 @@ class scrapingCoins {
 
                 return { priceValueDolar, priceValueBRL, nameSymbol };
 
-            } catch (error) {
+            } catch (err) {
 
-                console.warn("Erro: " + error);
+                return false
 
             }
         }
