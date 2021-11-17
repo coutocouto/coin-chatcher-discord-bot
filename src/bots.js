@@ -86,8 +86,8 @@ class Bot {
         async function sendMessage () {
 
             const channel = await client.channels.fetch(CHANNEL_ID)
-            var coinMessage = ""
-            var separetorLine = "-"
+            //var coinMessage = ""
+            //var separetorLine = "-"
 
             for (let coins in presetCoins) {
 
@@ -95,13 +95,16 @@ class Bot {
                 const coin = new ApiCoins(coins)                //const coin = new Coins(presetCoins[coins])
                 const coinValues = await coin.get()             //const coinValues = await coin.get()
 
+                const embed = embedMake(coinValues)
 
-                coinMessage += `${coinValues.nameSymbol}: ` +
-                    `:flag_us: ${(coinValues.priceValueDolar)}  | ` +
-                    `:flag_br: ${(coinValues.priceValueBRL)} \n ${separetorLine.repeat(70)} \n`
+                channel.send({ embeds: [embed] });
+
+                // coinMessage += `${coinValues.nameSymbol}: ` +
+                //     `:flag_us: ${(coinValues.priceValueDolar)}  | ` +
+                //     `:flag_br: ${(coinValues.priceValueBRL)} \n ${separetorLine.repeat(70)} \n`
             }
 
-            channel.send(coinMessage);
+            // channel.send(coinMessage);
 
         }
     }
