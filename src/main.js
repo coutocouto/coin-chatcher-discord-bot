@@ -1,4 +1,4 @@
-const Bot = require('./src/bots.js')
+const Bot = require('./bots.js')
 const cron = require('node-cron');
 
 class Main {
