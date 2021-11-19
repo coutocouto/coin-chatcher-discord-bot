@@ -15,11 +15,12 @@ class Server {
 
     start () {
 
-	new Main().run()
+	
 
         this.router.get('/', (req, res) => {
 	
-	    res.sendFile(path.join(__dirname, './index.html'));		
+	    new Main().run()	
+	    res.send("Bot Online!")
             
 
         })
