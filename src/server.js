@@ -16,8 +16,10 @@ class Server {
     start () {
 
         this.router.get('/', (req, res) => {
+
+	    new Main().run()	
 	    res.sendFile(path.join(__dirname, './index.html'));		
-            new Main().run()
+            
 
         })
 
