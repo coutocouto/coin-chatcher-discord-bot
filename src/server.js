@@ -15,7 +15,6 @@ class Server {
 
     start () {
 
-	
 
         this.router.get('/', (req, res) => {
 	
@@ -25,10 +24,12 @@ class Server {
 
         })
 
+        this.app.get('/')
+
         this.app.use('/', this.router);
         this.app.listen(this.port, () => {
 
-            console.log(`Servidor ouvindo na porta ${this.port}`)
+            console.log(`Server Listen on ${this.port}`)
 
         })
 
