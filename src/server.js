@@ -15,14 +15,15 @@ class Server {
 
     start () {
 
-	new Main().run()
+        new Main().run()
 
         this.router.get('/', (req, res) => {
-	
-	    res.sendFile(path.join(__dirname, './index.html'));		
-            
+
+            res.send("Ok")
 
         })
+
+        this.app.get('/')
 
         this.app.use('/', this.router);
         this.app.listen(this.port, () => {
