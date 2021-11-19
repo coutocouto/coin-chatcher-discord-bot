@@ -15,10 +15,10 @@ class Server {
 
     start () {
 
-
+	new Main().run()
+	    
         this.router.get('/', (req, res) => {
-	
-	    new Main().run()	
+	    	
 	    res.send("Bot Online!")
             
 
