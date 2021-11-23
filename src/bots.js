@@ -53,16 +53,17 @@ class Bot {
                 .setURL('https://github.com/coutocouto/coin-chatcher-discord-bot')
                 .addFields([{
 
-                    name: `${coinValues.nameSymbol} PRICE`,
-                    value: `:flag_us: ${coinValues.priceValueDolar}`
+                    name: `${coinValues.nameSymbol}`,
+                    value: `:flag_br: ${coinValues.priceValueBRL}`
 
                 },
                 {
 
-                    name: `${coinValues.nameSymbol} PRICE`,
-                    value: `:flag_br: ${coinValues.priceValueBRL}`
+                    name: `${coinValues.nameSymbol}`,
+                    value: `:flag_us: ${coinValues.priceValueDolar}`
 
                 }])
+
 
         }
     }
@@ -78,8 +79,7 @@ class Bot {
 
         client.on('ready', () => {
 
-            const hour = 1000 * 60 * 60
-            setInterval(sendMessage(), hour)
+            sendMessage()
 
         })
 
@@ -89,22 +89,57 @@ class Bot {
             //var coinMessage = ""
             //var separetorLine = "-"
 
+            // coinMessage += `${coinValues.nameSymbol}: ` +
+            //     `:flag_us: ${(coinValues.priceValueDolar)}  | ` +
+            //     `:flag_br: ${(coinValues.priceValueBRL)} \n ${separetorLine.repeat(70)} \n`
+
+            const embed = await superEmbedMake()
+
+            channel.send({ embeds: [embed] });
+
+        }
+
+        async function superEmbedMake () {
+
+            return new MessageEmbed()
+                .setColor('FFFB03')
+                .setTitle('Coin Catcher')
+                .setURL('https://github.com/coutocouto/coin-chatcher-discord-bot')
+                .addFields(await presetListFactory())
+
+        }
+
+        async function presetListFactory () {
+
+            let presetList = []
+            let blankSpace = { name: "\u200b", value: "\u200b", inline: true }
+
             for (let coins in presetCoins) {
 
                 //CHOOSE IN CONSUME A MARKETCAP API(NEED TO PAY)// OR SCRAPE WITH PUPPETEER
                 const coin = new ApiCoins(coins)                //const coin = new Coins(presetCoins[coins])
                 const coinValues = await coin.get()             //const coinValues = await coin.get()
 
-                const embed = embedMake(coinValues)
+                let presetObjectDolar = await presetObjectFactory(coinValues.nameSymbol, coinValues.priceValueDolar, ":flag_us:")
+                let presetObjectBRL = await presetObjectFactory(coinValues.nameSymbol, coinValues.priceValueBRL, ":flag_br:")
 
-                channel.send({ embeds: [embed] });
+                presetList.push(presetObjectBRL, presetObjectDolar, blankSpace)
 
-                // coinMessage += `${coinValues.nameSymbol}: ` +
-                //     `:flag_us: ${(coinValues.priceValueDolar)}  | ` +
-                //     `:flag_br: ${(coinValues.priceValueBRL)} \n ${separetorLine.repeat(70)} \n`
             }
 
-            // channel.send(coinMessage);
+            return presetList
+
+        }
+
+        async function presetObjectFactory (nameSymbol, priceValue, flag) {
+
+            let presetObject = {}
+
+            presetObject.name = `${nameSymbol}`
+            presetObject.value = `${flag} ${priceValue}`
+            presetObject.inline = true
+
+            return presetObject
 
         }
     }

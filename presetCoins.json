@@ -1,14 +1,11 @@
 {
-    "AXS": "axie-infinity",
-    "BTC": "bitcoin",
-    "BUSD": "binance-usd",
-    "BFC": "block-farm",
     "BCOIN": "bombcrypto",
     "CTFT": "coin-to-fish",
-    "DOGE": "dogecoin",
-    "HE": "heroes-and-empires",
-    "SHIB": "shiba-inu",
-    "WANA": "wanaka-farm",
     "ELMON": "elemon",
-    "THG": "thetan-arena"
+    "THG": "thetan-arena",
+    "CCAR": "cryptocars",
+    "HE": "heroes-and-empires",
+    "WANA": "wanaka-farm",
+    "BFC": "block-farm",
+    "BUSD": "binance-usd"
 }

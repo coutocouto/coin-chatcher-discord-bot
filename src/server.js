@@ -1,7 +1,6 @@
 
 const express = require('express');
 const path = require('path');
-const Main = require('./main')
 
 class Server {
 
@@ -15,12 +14,9 @@ class Server {
 
     start () {
 
-	new Main().run()
-	    
         this.router.get('/', (req, res) => {
-	    	
-	    res.send("Bot Online!")
-            
+
+            res.send("Bot Online!")
 
         })
 
