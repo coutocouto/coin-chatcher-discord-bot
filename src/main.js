@@ -9,13 +9,13 @@ class Main {
         const bot = new Bot()
         const url = "https://coin-catcherbot.herokuapp.com/"
 
-        cron.schedule("0 */1 * * *", () => {
+        cron.schedule("*/10 * * * *", () => {
 
             fetch(url).then(res => res)
 
         })
 
-        cron.schedule("0 */4 * * *", () => {
+        cron.schedule("0 */2 * * *", () => {
 
             bot.autoSendCoinValues()
 
