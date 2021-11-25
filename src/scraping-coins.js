@@ -1,45 +1,46 @@
-const puppeteer = require('puppeteer');
+/* eslint-disable no-undef */
+const puppeteer = require("puppeteer");
 
 class scrapingCoins {
 
-    constructor(coinType) {
-        this.coinType = coinType
-    }
+	constructor(coinType) {
+		this.coinType = coinType;
+	}
 
-    async get () {
+	async get () {
 
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
+		const browser = await puppeteer.launch();
+		const page = await browser.newPage();
 
-        const priceValues = await getValues(page, this.coinType);
+		const priceValues = await getValues(page, this.coinType);
 
-        return priceValues;
+		return priceValues;
 
 
-        async function getValues (page, coinType) {
+		async function getValues (page, coinType) {
 
-            try {
+			try {
 
-                await page.goto(`https://coinmarketcap.com/currencies/${coinType}/`);
+				await page.goto(`https://coinmarketcap.com/currencies/${coinType}/`);
 
-                const priceValueDolar = await page.evaluate(() => document.querySelector('.priceValue ').textContent);
-                const nameSymbol = await page.evaluate(() => document.querySelector('.nameSymbol').textContent);
+				const priceValueDolar = await page.evaluate(() => document.querySelector(".priceValue ").textContent);
+				const nameSymbol = await page.evaluate(() => document.querySelector(".nameSymbol").textContent);
 
-                await page.goto(`https://coinmarketcap.com/pt-br/currencies/${coinType}/`);
+				await page.goto(`https://coinmarketcap.com/pt-br/currencies/${coinType}/`);
 
-                const priceValueBRL = await page.evaluate(() => document.querySelector('.priceValue ').textContent);
+				const priceValueBRL = await page.evaluate(() => document.querySelector(".priceValue ").textContent);
 
-                await browser.close();
+				await browser.close();
 
-                return { priceValueDolar, priceValueBRL, nameSymbol };
+				return { priceValueDolar, priceValueBRL, nameSymbol };
 
-            } catch (err) {
+			} catch (err) {
 
-                return false
+				return false;
 
-            }
-        }
-    }
+			}
+		}
+	}
 }
 
-module.exports = scrapingCoins
+module.exports = scrapingCoins;

@@ -1,6 +1,6 @@
-const Server = require('./src/server.js')
-const Main = require('./src/main')
+const Server = require("./src/server.js");
+const Main = require("./src/main");
 
 
-new Main().run()
-new Server().start()
+new Main().run();
+new Server().start();
