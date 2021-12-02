@@ -6,12 +6,12 @@ class apiCoins {
 	constructor(coinType) {
 
 		this.coinType = coinType
-		this.API_KEY = process.env.API_KEY // API KEY FROM https://pro.coinmarketcap.com/
 
 	}
 
 	async get () {
 
+		const API_KEY = process.env.API_KEY // API KEY FROM https://pro.coinmarketcap.com/
 		const baseUrl = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 		const symbol = `?&symbol=${this.coinType}`
 
@@ -20,7 +20,7 @@ class apiCoins {
 
 		const parameters = {
 
-			headers: { 'X-CMC_PRO_API_KEY': this.API_KEY },
+			headers: { 'X-CMC_PRO_API_KEY': API_KEY },
 
 		}
 
