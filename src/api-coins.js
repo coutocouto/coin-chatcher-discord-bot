@@ -42,7 +42,7 @@ class apiCoins {
 					.then(response => response.json()
 						.then(dataCoins => dataCoins.data[nameSymbol].quote.BRL.price));
 
-				if (priceValueDolar > 1 || priceValueBRL > 1) {
+				if (priceValueDolar > 0.01 || priceValueBRL > 0.01) {
 
 					priceValueDolar = priceValueDolar.toLocaleString("en-us", { style: "currency", currency: "USD" });
 					priceValueBRL = priceValueBRL.toLocaleString("pt-br", { style: "currency", currency: "BRL" });
