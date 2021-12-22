@@ -1,11 +1,11 @@
 {
     "BCOIN": "bombcrypto",
-    "CTFT": "coin-to-fish",
-    "THG": "thetan-gem",
     "GODZ": "crypto-godz",
     "CCAR": "cryptocars",
     "CPAN": "cryptoplanes",
-    "HE": "heroes-and-empires",
+    "CSHIP": "cryptoships",
+    "CGAR": "cryptoguards",
+    "CMC": "cryptomotorcycle",
     "WAI": "wairere-token",
     "BUSD": "binance-usd"
 }

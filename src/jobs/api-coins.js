@@ -71,7 +71,9 @@ class apiCoins {
 			return { priceValueDolar, priceValueBRL }
 
 		}
+
 	}
+
 }
 
 module.exports = apiCoins

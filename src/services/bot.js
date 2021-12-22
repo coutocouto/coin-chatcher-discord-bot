@@ -15,7 +15,7 @@ class Bot {
 
 	async sendCoinValues () {
 
-		const prefix = config.prefix    //PREFIX THAT WILL BE USED FOR THE COMMAND
+		const prefix = config.prefix //PREFIX THAT WILL BE USED FOR THE COMMAND
 		const CHANNEL_NAME = process.env.CHANNEL_NAME //CHANNEL DISCORD NAME
 
 		const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] })
@@ -28,12 +28,14 @@ class Bot {
 			const coinType = await formatMessage(message)
 
 			//CHOOSE IN CONSUME A MARKETCAP API(NEED TO PAY)  // OR SCRAPE WITH PUPPETEER
-			const coin = new ApiCoins(coinType)              //const coin = new Coins(coinType)
-			const coinValues = await coin.get()              //const coinValues = await coin.get()
+			const coin = new ApiCoins(coinType) //const coin = new Coins(coinType)
+			const coinValues = await coin.get() //const coinValues = await coin.get()
 
 			if (!coinValues) {
+
 				message.channel.send('Comando invalido!')
 				return
+
 			}
 
 			const embed = embedMake(coinValues)
@@ -58,25 +60,27 @@ class Bot {
 		}
 
 		function embedMake (coinValues) {
+
 			return new MessageEmbed()
 				.setColor('FFFB03')
 				.setTitle('Coin Catcher')
 				.setURL('https://github.com/coutocouto/coin-chatcher-discord-bot')
 				.addFields([{
 
-					name: `${coinValues.nameSymbol}`,
+					name:  ` ${coinValues.nameSymbol}`,
 					value: `:flag_br: ${coinValues.priceValueBRL}`
 
 				},
 				{
 
-					name: `${coinValues.nameSymbol}`,
+					name:  ` ${coinValues.nameSymbol}`,
 					value: `:flag_us: ${coinValues.priceValueDolar}`
 
 				}])
 
 
 		}
+
 	}
 
 
@@ -127,8 +131,8 @@ class Bot {
 			for (let coins in presetCoins) {
 
 				//CHOOSE IN CONSUME A MARKETCAP API(NEED TO PAY)// OR SCRAPE WITH PUPPETEER
-				const coin = new ApiCoins(coins)                //const coin = new Coins(presetCoins[coins])
-				const coinValues = await coin.get()             //const coinValues = await coin.get()
+				const coin = new ApiCoins(coins) //const coin = new Coins(presetCoins[coins])
+				const coinValues = await coin.get() //const coinValues = await coin.get()
 
 				let presetObjectDolar = await presetObjectFactory(coinValues.nameSymbol, coinValues.priceValueDolar, ':flag_us:')
 				let presetObjectBRL = await presetObjectFactory(coinValues.nameSymbol, coinValues.priceValueBRL, ':flag_br:')
@@ -152,7 +156,9 @@ class Bot {
 			return presetObject
 
 		}
+
 	}
+
 }
 
 module.exports = Bot
