@@ -10,7 +10,7 @@ const bot = new Bot()
 
 const url = 'https://coin-catcherbot.herokuapp.com/'
 
-cron.schedule('*/10 * * * *', () => {
+cron.schedule('* * 24 * * *', () => {
 
 	fetch(url).then(res => res)
 
